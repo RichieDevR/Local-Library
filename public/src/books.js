@@ -31,7 +31,12 @@ function partitionBooksByBorrowedStatus(books) {
 }
 
 function getBorrowersForBook(book, accounts) {
- //mapping b
+ //mapping borrows array in the books array by 
+ //taking all account id's and
+ //comparing them to id's within the borrows array and then 
+ //setting that equal to a variable which is then updated with the returned 
+ //array we just found, we then return borrowers variable sliced by the first 10 
+ //of the array
   const borrowers = book.borrows.map((borrow)=>{
     const account = accounts.find((account)=>account.id === borrow.id);
     account.returned = borrow.returned;
