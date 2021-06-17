@@ -1,27 +1,37 @@
 
+/* using the find method to output author whos id is equal to the id paramater
+passed into the function*/
 function findAuthorById(authors, id) {
     return authors.find((author) => author.id === id)
 }
 
-
+/*does the same as above using the books array instead
+and this time matching the id parameter in this case of a book
+to the matching id key:value pair in the books array*/
 function findBookById(books, id){
     return books.find((book)=> book.id === id)
     
 }
 
 function partitionBooksByBorrowedStatus(books) {
-  let sort1 = books.filter((book)=>!book.borrows[0].returned);
-  let sort2 = books.filter((book)=>book.borrows[0].returned);
+  //filter all objects that have not been returned 
+  let filterA = books.filter((book)=>!book.borrows[0].returned);
+  //filter all items that have been returned
+  let filterB = books.filter((book)=>book.borrows[0].returned);
+  //set answer to empty array
   let answer = [];
-  answer.push(sort1);
-  answer.push(sort2);
+  /*push both filters to answer so that books borrowed not yet 
+  returned appear first and books returned 
+  appear second and then return*/
+  answer.push(filterA);
+  answer.push(filterB);
   return answer;
 
 
 }
 
 function getBorrowersForBook(book, accounts) {
- 
+ //mapping b
   const borrowers = book.borrows.map((borrow)=>{
     const account = accounts.find((account)=>account.id === borrow.id);
     account.returned = borrow.returned;
@@ -35,17 +45,7 @@ function getBorrowersForBook(book, accounts) {
 
 }
 
-function sortObjectByValues(obj){
-        const keys = Object.keys(obj);
-        return keys.sort((keyA,keyB) => {
-          if(obj[keyA] > obj[keyB]){
-              return -1;
-            }else if(obj[keyB] > obj[keyA]){
-            return 1;
-              }else{
-            return 0;
-            }
-        })}
+
 
 module.exports = {
   findAuthorById,
